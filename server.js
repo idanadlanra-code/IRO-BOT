@@ -1,9 +1,8 @@
-const express = require("express");
-const app = express();
-
-app.use(express.json());
-
 app.post("/webhook", (req, res) => {
+  // 👇 קודם כל מחזירים תשובה ל-Railway
+  res.status(200).send("OK");
+
+  // 👇 רק אחרי זה עושים לוגיקה
   console.log("📩 BODY:", req.body);
 
   const { from, text } = req.body;
@@ -11,12 +10,4 @@ app.post("/webhook", (req, res) => {
   if (text === "הצטרפות") {
     console.log(`📤 To ${from}: אזור מגורים`);
   }
-
-  // 👇 הכי חשוב — להחזיר מיד תשובה
-  res.status(200).send("OK");
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("🚀 Server running on", PORT);
 });
