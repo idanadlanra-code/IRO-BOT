@@ -1,13 +1,14 @@
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+// 👇 רק בדיקה — בלי שום דבר נוסף
 app.post("/webhook", (req, res) => {
-  // 👇 קודם כל מחזירים תשובה ל-Railway
-  res.status(200).send("OK");
+  return res.status(200).send("OK");
+});
 
-  // 👇 רק אחרי זה עושים לוגיקה
-  console.log("📩 BODY:", req.body);
-
-  const { from, text } = req.body;
-
-  if (text === "הצטרפות") {
-    console.log(`📤 To ${from}: אזור מגורים`);
-  }
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("🚀 Server running on", PORT);
 });
